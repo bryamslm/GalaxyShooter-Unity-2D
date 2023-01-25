@@ -22,13 +22,13 @@ public class Player : MonoBehaviour
         //using the input to move the player
         transform.Translate(new Vector3(horizontal, vertical, 0) * velocidadMovimiento * Time.deltaTime);
         
-        if(transform.position.x < -8.25f)
+        if(transform.position.x < -9.5f)
         {
-            transform.position = new Vector3(-8.25f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(9.5f, transform.position.y, transform.position.z);
         }
-        if (transform.position.x > 8.25f)
+        if (transform.position.x > 9.5f)
         {
-            transform.position = new Vector3(8.25f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-9.5f, transform.position.y, transform.position.z);
         }
         if (transform.position.y > 0)
         {
