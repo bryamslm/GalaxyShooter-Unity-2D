@@ -738,6 +738,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidadMovimiento: 5
+  laserPrefab: {fileID: 7793020565572689779, guid: 300e6f72ae62bb045bdd7002831810d1, type: 3}
+  fireRate: 0.15
+  canFire: 0
 --- !u!212 &944219099
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -798,7 +801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944219097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.27, y: -2, z: -0.01}
+  m_LocalPosition: {x: 0, y: -2, z: -0.01}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
