@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] public bool tripleDisparo = false;
 
     [SerializeField] private float _timeTripleDisparo= 10f;
+    [SerializeField] private float _timeSpeedPoweUp= 15f;
 
     [SerializeField] private float _velocidadMovimiento = 5f;
 
@@ -96,21 +97,34 @@ public class Player : MonoBehaviour
     //OnTriggerEnter2D is called when the Collider2D other enters the trigger
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "TripleShot")
+        if(other.tag == "TripleShotPowerUp")
         {
             tripleDisparo = true;
-            StartCoroutine(NoPowerUp(_timeTripleDisparo, "TripleShot"));
+            StartCoroutine(NoPowerUp(_timeTripleDisparo, "TripleShotPowerUp"));
         }
+        else if(other.tag == "SpeedPowerUp")
+        {
+            _velocidadMovimiento = 10f;
+            StartCoroutine(NoPowerUp(_timeSpeedPoweUp, "SpeedPowerUp"));
+        }
+
+        Destroy(other.gameObject);
+    
     }
 
 
     IEnumerator NoPowerUp(float time, string powerUp)
     {
         yield return new WaitForSeconds(time);
-        if(powerUp == "TripleShot")
+        if(powerUp == "TripleShotPowerUp")
         {
             tripleDisparo = false;
         }
+        else if(powerUp == "SpeedPowerUp")
+        {
+            _velocidadMovimiento = 5f;
+        }
+
     }
     
 }

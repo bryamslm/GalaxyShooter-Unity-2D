@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleShot : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     [SerializeField] private float _velocidadPawer = 5f;
     // Start is called before the first frame update
