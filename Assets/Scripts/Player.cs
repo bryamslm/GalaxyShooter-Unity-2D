@@ -15,9 +15,17 @@ public class Player : MonoBehaviour
     // laser prefab
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _laserVerdePrefab;
+    [SerializeField] private GameObject _EnemiePrefab;
 
     [SerializeField] private float _fireRate = 0.10f;
     [SerializeField] private float _canFire = 0.0f;
+    [SerializeField] private float _aumentedCreationEnemies = 10f;
+    [SerializeField] private float _auxAumentedEnemies = 0f;
+
+    [SerializeField] private float _enemieRate = 3f;
+    [SerializeField] private float _canEnemie = 0.0f;
+
+    [SerializeField] private int lifes = 3;
     
     // Start is called before the first frame update
     void Start()
@@ -38,7 +46,32 @@ public class Player : MonoBehaviour
 
             Shoot();
         }
+
+        EnemieCreation();
         
+    }
+
+    private void EnemieCreation()
+    {
+        if(Time.time > _aumentedCreationEnemies)
+        {
+            _aumentedCreationEnemies += 15f;
+            if(Time.time > _auxAumentedEnemies)
+            {
+                _enemieRate = _enemieRate - 0.1f;
+            }
+            else
+            {
+                _enemieRate = _enemieRate - 0.5f;
+            }
+           
+        }
+    
+        if(Time.time > _canEnemie)
+        {
+            _canEnemie = Time.time + _enemieRate;
+            Instantiate(_EnemiePrefab);
+        }
     }
 
     void Shoot()
@@ -106,6 +139,14 @@ public class Player : MonoBehaviour
         {
             _velocidadMovimiento = 10f;
             StartCoroutine(NoPowerUp(_timeSpeedPoweUp, "SpeedPowerUp"));
+        }
+        else if(other.tag == "Enemy")
+        {
+            lifes--;
+            if(lifes == 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
 
         Destroy(other.gameObject);
