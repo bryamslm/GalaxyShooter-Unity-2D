@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] public bool tripleDisparo = false;
 
+    [SerializeField] private float _timeTripleDisparo= 10f;
+
     [SerializeField] private float _velocidadMovimiento = 5f;
 
     // laser prefab
@@ -90,4 +92,25 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -4.15f, transform.position.z);
         }
     }
+
+    //OnTriggerEnter2D is called when the Collider2D other enters the trigger
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "TripleShot")
+        {
+            tripleDisparo = true;
+            StartCoroutine(NoPowerUp(_timeTripleDisparo, "TripleShot"));
+        }
+    }
+
+
+    IEnumerator NoPowerUp(float time, string powerUp)
+    {
+        yield return new WaitForSeconds(time);
+        if(powerUp == "TripleShot")
+        {
+            tripleDisparo = false;
+        }
+    }
+    
 }
