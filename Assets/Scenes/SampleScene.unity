@@ -737,10 +737,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d1068c9b9074f4898d4f6cf37ceb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadMovimiento: 5
-  laserPrefab: {fileID: 7793020565572689779, guid: 300e6f72ae62bb045bdd7002831810d1, type: 3}
-  fireRate: 0.15
-  canFire: 0
+  tripleDisparo: 0
+  _velocidadMovimiento: 5
+  _laserPrefab: {fileID: 4865928093436228957, guid: 300e6f72ae62bb045bdd7002831810d1, type: 3}
+  _laserVerdePrefab: {fileID: 5514048015185246524, guid: 771b986b04045c64782ba7855a24a924, type: 3}
+  _fireRate: 0.1
+  _canFire: 0
 --- !u!212 &944219099
 SpriteRenderer:
   m_ObjectHideFlags: 0

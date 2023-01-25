@@ -5,10 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    [SerializeField] public bool tripleDisparo = false;
+
     [SerializeField] private float _velocidadMovimiento = 5f;
 
     // laser prefab
     [SerializeField] private GameObject _laserPrefab;
+    [SerializeField] private GameObject _laserVerdePrefab;
 
     [SerializeField] private float _fireRate = 0.10f;
     [SerializeField] private float _canFire = 0.0f;
@@ -30,21 +33,32 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
 
-            if(Time.time > _canFire)
-            {
-                _canFire = Time.time + _fireRate;
-                Shoot();
-            }
+            Shoot();
         }
-
         
     }
 
     void Shoot()
     {
-        //instantiate the laser prefab
-        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.95f, 0), Quaternion.identity);
+        if(Time.time > _canFire)
+        {
+            _canFire = Time.time + _fireRate;
+            
+            if(tripleDisparo)
+            {
+                //instantiate the laser prefab
+                Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.95f, 0), Quaternion.identity);
+                Instantiate(_laserVerdePrefab, transform.position + new Vector3(-0.626f, -0.35f, 0), Quaternion.identity);
+                Instantiate(_laserVerdePrefab, transform.position + new Vector3(0.626f, -0.35f, 0), Quaternion.identity);
 
+            }
+            else
+            {
+                //instantiate the laser prefab
+                Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.95f, 0), Quaternion.identity);
+            }
+            
+        }
     }
 
     private void PlayerMovement()
