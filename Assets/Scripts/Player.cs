@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _timeTripleDisparo= 10f;
     [SerializeField] private float _timeSpeedPoweUp= 15f;
+    [SerializeField] private float _timeShieldPoweUp= 10f;
+    [SerializeField] private bool _shieldEscudo = false;
 
     [SerializeField] private float _velocidadMovimiento = 5f;
 
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _laserVerdePrefab;
     [SerializeField] private GameObject _EnemiePrefab;
+    [SerializeField] private GameObject _ExplosionPrefab;
 
     [SerializeField] private float _fireRate = 0.10f;
     [SerializeField] private float _canFire = 0.0f;
@@ -140,18 +143,31 @@ public class Player : MonoBehaviour
             _velocidadMovimiento = 10f;
             StartCoroutine(NoPowerUp(_timeSpeedPoweUp, "SpeedPowerUp"));
         }
+        else if(other.tag == "ShieldPowerUp")
+        {
+            _shieldEscudo = true;
+            StartCoroutine(NoPowerUp(_timeShieldPoweUp, "ShieldPowerUp"));
+        }
         else if(other.tag == "Enemy")
         {
-            lifes--;
+            if(!_shieldEscudo)
+            {
+                lifes--;
+            }
             if(lifes == 0)
             {
+               Instantiate(_ExplosionPrefab, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
+
+            Instantiate(_ExplosionPrefab, other.transform.position, Quaternion.identity);
+    
         }
 
         Destroy(other.gameObject);
     
     }
+
 
 
     IEnumerator NoPowerUp(float time, string powerUp)
@@ -164,6 +180,10 @@ public class Player : MonoBehaviour
         else if(powerUp == "SpeedPowerUp")
         {
             _velocidadMovimiento = 5f;
+        }
+        else if(powerUp == "ShieldPowerUp")
+        {
+            _shieldEscudo = false;
         }
 
     }

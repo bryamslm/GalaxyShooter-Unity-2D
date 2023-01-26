@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _velocidadLaser: 14
+  _ExplosionPrefab: {fileID: 1439065169743837871, guid: 71d0c9b5c82a88d43a6947405042baf5, type: 3}
 --- !u!70 &5816469102340518123
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

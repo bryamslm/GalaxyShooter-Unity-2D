@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     [SerializeField] private float _velocidadLaser = 14f;
+     [SerializeField] private GameObject _ExplosionPrefab;
 
     
     // Start is called before the first frame update
@@ -31,8 +32,13 @@ public class Laser : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            Debug.Log("Enemy hit");
+            Instantiate(_ExplosionPrefab, other.transform.position, Quaternion.identity);
+            
             Destroy(other.gameObject);
-            Destroy(gameObject);
+           
         }
     }
+
+    
 }
