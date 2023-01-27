@@ -36,6 +36,7 @@ public class Laser : MonoBehaviour
             Instantiate(_ExplosionPrefab, other.transform.position, Quaternion.identity);
             
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
            
         }
     }

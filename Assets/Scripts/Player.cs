@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _timeTripleDisparo= 10f;
     [SerializeField] private float _timeSpeedPoweUp= 15f;
-    [SerializeField] private float _timeShieldPoweUp= 10f;
+    [SerializeField] public float timeShieldPoweUp= 10f;
     [SerializeField] private bool _shieldEscudo = false;
 
     [SerializeField] private float _velocidadMovimiento = 5f;
@@ -19,11 +19,12 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserVerdePrefab;
     [SerializeField] private GameObject _EnemiePrefab;
     [SerializeField] private GameObject _ExplosionPrefab;
+    [SerializeField] private GameObject _ShieldPrefab;
 
     [SerializeField] private float _fireRate = 0.10f;
     [SerializeField] private float _canFire = 0.0f;
     [SerializeField] private float _aumentedCreationEnemies = 10f;
-    [SerializeField] private float _auxAumentedEnemies = 0f;
+    [SerializeField] private float _auxAumentedEnemies = 50f;
 
     [SerializeField] private float _enemieRate = 3f;
     [SerializeField] private float _canEnemie = 0.0f;
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
     {
         if(Time.time > _aumentedCreationEnemies)
         {
-            _aumentedCreationEnemies += 15f;
+            _aumentedCreationEnemies += 10f;
             if(Time.time > _auxAumentedEnemies)
             {
                 _enemieRate = _enemieRate - 0.1f;
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
            
         }
     
-        if(Time.time > _canEnemie)
+        if(Time.time > _canEnemie && _enemieRate > 0.2f)
         {
             _canEnemie = Time.time + _enemieRate;
             Instantiate(_EnemiePrefab);
@@ -146,7 +147,10 @@ public class Player : MonoBehaviour
         else if(other.tag == "ShieldPowerUp")
         {
             _shieldEscudo = true;
-            StartCoroutine(NoPowerUp(_timeShieldPoweUp, "ShieldPowerUp"));
+            GameObject shield = Instantiate(_ShieldPrefab, transform.position + new Vector3(0, 0, -1f), Quaternion.identity);
+            shield.transform.parent = this.transform;
+
+            StartCoroutine(NoPowerUp(timeShieldPoweUp, "ShieldPowerUp"));
         }
         else if(other.tag == "Enemy")
         {
