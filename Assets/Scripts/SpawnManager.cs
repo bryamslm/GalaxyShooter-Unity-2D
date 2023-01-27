@@ -7,10 +7,17 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject _speedPrefab;
     [SerializeField] private GameObject _triplePrefab;
     [SerializeField] private GameObject _shieldPrefab;
+    [SerializeField] private GameObject _EnemiePrefab;
 
     [SerializeField] private float _peedTimeSpawn;
     [SerializeField] private float _tripleTimeSpawn;
     [SerializeField] private float _shieldTimeSpawn;
+
+    [SerializeField] private float _auxAumentedEnemies = 50f;
+    [SerializeField] private float _aumentedCreationEnemies = 7f;
+    [SerializeField] private float _enemieRate = 3f;
+    [SerializeField] private float _canEnemie = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,20 +33,33 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    // void SpeedController()
-    // {
-
-    // }
-
-    // void TripleController()
-    // {
-
-    // }
-
-    // void ShieldController()
-    // {
-
-    // }
+    void Update()
+    {
+        EnemieCreation();   
+    }
+    
+    private void EnemieCreation()
+    {
+        if(Time.time > _aumentedCreationEnemies)
+        {
+            _aumentedCreationEnemies += 7f;
+            if(Time.time > _auxAumentedEnemies && _enemieRate > 0.1f)
+            {
+                _enemieRate = _enemieRate - 0.05f;
+            }
+            else
+            {
+                _enemieRate = _enemieRate - 0.5f;
+            }
+           
+        }
+    
+        if(Time.time > _canEnemie)
+        {
+            _canEnemie = Time.time + _enemieRate;
+            Instantiate(_EnemiePrefab);
+        }
+    }
 
     IEnumerator SpeedSpawn()
     {
