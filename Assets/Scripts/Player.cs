@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     
 
     [SerializeField] private int lifes = 3;
+    [SerializeField] private UIManager _uiManager;
     
     // Start is called before the first frame update
     void Start()
@@ -132,6 +133,7 @@ public class Player : MonoBehaviour
             if(!_shieldEscudo)
             {
                 lifes--;
+                _uiManager.UpdateLives(lifes);
             }
             if(lifes == 0)
             {

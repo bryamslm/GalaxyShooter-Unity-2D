@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _shieldTimeSpawn;
 
     [SerializeField] private float _auxAumentedEnemies = 50f;
-    [SerializeField] private float _aumentedCreationEnemies = 7f;
+    [SerializeField] private float _aumentedCreationEnemies = 5f;
     [SerializeField] private float _enemieRate = 3f;
     [SerializeField] private float _canEnemie = 0.0f;
 
@@ -23,9 +23,9 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         //random spawn between 15 and 23 seconds
-        _peedTimeSpawn = Random.Range(15, 23);
-        _tripleTimeSpawn = Random.Range(15, 23);
-        _shieldTimeSpawn = Random.Range(15, 23);
+        _peedTimeSpawn = Random.Range(4, 23);
+        _tripleTimeSpawn = Random.Range(4, 23);
+        _shieldTimeSpawn = Random.Range(4, 23);
 
         StartCoroutine(SpeedSpawn());
         StartCoroutine(TripleSpawn());
@@ -42,14 +42,43 @@ public class SpawnManager : MonoBehaviour
     {
         if(Time.time > _aumentedCreationEnemies)
         {
-            _aumentedCreationEnemies += 7f;
-            if(Time.time > _auxAumentedEnemies && _enemieRate > 0.1f)
+            _aumentedCreationEnemies += 5f;
+            if(Time.time > _auxAumentedEnemies)
             {
-                _enemieRate = _enemieRate - 0.05f;
+                
+                if(_enemieRate < 0.5f)
+                {
+                    _enemieRate -= 0.07f;
+                    Debug.Log("Aqui");
+                    if(_enemieRate <= 0.2f){
+                        _enemieRate = 0.2f;
+                    }
+                }
+                else
+                {
+                    _enemieRate = _enemieRate - 0.5f;
+                }
             }
             else
             {
-                _enemieRate = _enemieRate - 0.5f;
+                if(_enemieRate <= 0.5f)
+                {
+                    _enemieRate -= 0.07f;
+                    Debug.Log("Aqui");
+
+                    if(_enemieRate <= 0.2f){
+                        _enemieRate = 0.2f;
+                    }
+                }
+                else
+                
+                {
+                    _enemieRate = _enemieRate - 0.5f;
+                }
+               
+                
+                
+                
             }
            
         }
