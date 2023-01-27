@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Laser : MonoBehaviour
 {
     [SerializeField] private float _velocidadLaser = 14f;
      [SerializeField] private GameObject _ExplosionPrefab;
+     [SerializeField] private UIManager _uiManager;
 
     
     // Start is called before the first frame update
     void Start()
     {
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         
     }
 
@@ -32,10 +35,12 @@ public class Laser : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+
             Debug.Log("Enemy hit");
             Instantiate(_ExplosionPrefab, other.transform.position, Quaternion.identity);
             
             Destroy(other.gameObject);
+            _uiManager.UpdateScore();
             Destroy(this.gameObject);
            
         }

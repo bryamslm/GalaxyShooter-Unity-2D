@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
                Instantiate(_ExplosionPrefab, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
+            _uiManager.UpdateScore();
 
             Instantiate(_ExplosionPrefab, other.transform.position, Quaternion.identity);
     

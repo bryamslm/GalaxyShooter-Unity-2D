@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite _twoLives;
     [SerializeField] private Sprite _threeLives;
     [SerializeField] private Sprite _zeroLives;
+    [SerializeField] private TextMeshProUGUI _scoreCount;
+    private int _score = 0;
     //image
     [SerializeField] private Image _livesImage;
     
@@ -33,5 +36,11 @@ public class UIManager : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void UpdateScore()
+    {
+        _score += 1;
+        _scoreCount.text = _score.ToString();
     }
 }
