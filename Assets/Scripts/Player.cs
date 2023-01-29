@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _timeSpeedPoweUp= 15f;
     [SerializeField] public float timeShieldPoweUp= 10f;
     [SerializeField] private bool _shieldEscudo = false;
+    [SerializeField] private int _speedPowerUp = 17;
+    private int _auxSpeed;
 
     [SerializeField] private float _velocidadMovimiento = 5f;
 
@@ -117,7 +119,8 @@ public class Player : MonoBehaviour
         }
         else if(other.tag == "SpeedPowerUp")
         {
-            _velocidadMovimiento = 10f;
+            _auxSpeed = _velocidadMovimiento;
+            _velocidadMovimiento = _speedPowerUp;
             StartCoroutine(NoPowerUp(_timeSpeedPoweUp, "SpeedPowerUp"));
         }
         else if(other.tag == "ShieldPowerUp")
@@ -161,7 +164,7 @@ public class Player : MonoBehaviour
         }
         else if(powerUp == "SpeedPowerUp")
         {
-            _velocidadMovimiento = 5f;
+            _velocidadMovimiento = _auxSpeed;
         }
         else if(powerUp == "ShieldPowerUp")
         {

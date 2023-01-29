@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _aumentedCreationEnemies = 5f;
     [SerializeField] private float _enemieRate = 3f;
     [SerializeField] private float _canEnemie = 0.0f;
+    [SerializeField] private float _canSpeed = 0.0f;
 
 
     // Start is called before the first frame update
